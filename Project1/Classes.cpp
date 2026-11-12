@@ -39,27 +39,6 @@ public:
 
 };
 
-class User {
-public:
-	string name;
-	double score;
-};
-
-class QuestionBank {
-private:
-	vector<Question> questions;
-
-public:
-	void addQuestion(Question question);
-	void removeQuestion(int index);
-	Question getQuestion(int index) const;
-
-	vector<Question> getQuestionByCategory(string category);
-	vector<Question> getQuestionByDifficulty(int difficulty);
-
-	int getQuestionCount() const;
-};
-
 class InterviewSession {
 
 private: 	vector<Question> questions;
@@ -81,22 +60,28 @@ public:
 	void displayQuestions() {
 		// Implementation for displaying questions to the user
 
-	}
+class User {
+public:
+	string name;
+	double score;
 };
 
 
-class Menu {
-
-	string mainMenuChoice;
+class Menu:public User {
 
 public:
+
 	void print_main_menu() {
+		//display main menu
 		cout << "Hello, welcome to the Coding Interview Simulator! \n would you like to: " << endl;
 		cout << "A. Start the Interview \n B. See Last Interview's Results \n C. Exit" << endl;
 	}
 
+
+
 	void print_Results() {
 		// Implementation for printing interview results
+		cout << name << ", your new score is: " << score << endl;
 
 	}
 };

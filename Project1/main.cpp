@@ -1,9 +1,16 @@
 #include <iostream>
+#include "Classes.cpp"
 
 using namespace std;
 
 
 int main() {
-	cout << "Hello, World!" << endl;
-	return 0;
+
+	//main menu
+	Menu Opening;
+	Opening.print_main_menu();
+
+
+
+	
 }
