@@ -20,7 +20,18 @@ public:
 };
 
 class QuestionBank {
+private:
+	vector<Question> questions;
 
+public:
+	void addQuestion(Question question);
+	void removeQuestion(int index);
+	Question getQuestion(int index) const;
+
+	vector<Question> getQuestionByCategory(string category);
+	vector<Question> getQuestionByDifficulty(string difficulty);
+
+	int getQuestionCount() const;
 };
 
 class menu :public User {
