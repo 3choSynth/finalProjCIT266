@@ -39,26 +39,6 @@ public:
 
 };
 
-class InterviewSession {
-
-private: 	vector<Question> questions;
-	   // Other private members related to the interview session
-	   User user;
-	   int score;
-	   int totalQuestions;
-
-public:
-	void startSession() {
-		// Implementation for starting the interview session
-	}
-	void endSession() {
-		// Implementation for ending the interview session
-	}
-	void recordResult(User user, double score) {
-		// Implementation for recording the result of the interview session
-	}
-};
-
 class User {
 public:
 	string name;
@@ -79,6 +59,31 @@ public:
 
 	int getQuestionCount() const;
 };
+
+class InterviewSession {
+
+private: 	vector<Question> questions;
+	   // Other private members related to the interview session
+	   User user;
+	   int score;
+	   int totalQuestions;
+
+public:
+	void startSession() {
+		// Implementation for starting the interview session
+	}
+	void endSession() {
+		// Implementation for ending the interview session
+	}
+	void recordResult(User user, double score) {
+		// Implementation for recording the result of the interview session
+	}
+	void displayQuestions() {
+		// Implementation for displaying questions to the user
+
+	}
+};
+
 
 class Menu {
 
