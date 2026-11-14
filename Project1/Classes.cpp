@@ -37,6 +37,16 @@ public:
 };
 
 class QuestionBank {
+	
+private:
+	vector<Question> questions;
+public:
+	void getRandomQuestions(int numQuestions) {
+		// Implementation for retrieving random questions from the question bank
+	}
+	void getQuestionsByCategory(string category) {
+		// Implementation for retrieving questions by category from the question bank
+	}
 
 };
 
@@ -44,43 +54,44 @@ class QuestionBank {
 class InterviewSession {
 
 private: 	
-	   vector<Question> questions;
+	   vector<Question> sessionQuestions;
 	   // Other private members related to the interview session
 	   User user;
-	   int score = 0;
+	   int sessionScore = 0;
 
 public:
 	void startSession() {
 		// Implementation for starting the interview session
 
-		for (int i = 0; i < questions.size(); i++) {
+		for (int i = 0; i < sessionQuestions.size(); i++) {
 			// Display question and get user answer
-			cout << questions[i].displayQuestion() << endl;
+			cout << sessionQuestions[i].displayQuestion() << endl;
 			string userAnswer;
 			cin >> userAnswer;
-			if (questions[i].checkAnswer(userAnswer)) {
-				score++;
+			if (sessionQuestions[i].checkAnswer(userAnswer)) {
+				sessionScore++;
 			}
 		}
 	}
 	void endSession() {
 		// Implementation for ending the interview session
+		double percentageScore = (static_cast<double>(sessionScore) / sessionQuestions.size()) * 100;
+		cout << "Interview session ended. Your score is: " << sessionScore	 <<"/" << sessionQuestions.size() << " (" << percentageScore << "%)" << endl;
+		
+		if (percentageScore >= 75) {
+			cout << "Congratulations! You passed the interview." << endl;
+		}
+		else {
+			cout << "You failed the interview." << endl;
+		}
 	}
 	void recordResult(User user, double score) {
 		// Implementation for recording the result of the interview session
 
 	}
-	void print_Results() {
-			// Implementation for printing interview results
-			cout << getUserName() << ", your score in this interview is: " << getScore() << endl;
-		}
-
-	string getUserName() const {
-		return user.name;
-	}
 
 	int getScore() const {
-		return score;
+		return sessionScore;
 	}
 	
 	
