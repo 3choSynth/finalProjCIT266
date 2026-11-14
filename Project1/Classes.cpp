@@ -3,85 +3,85 @@
 #include <string>
 using namespace std;
 
+class User {
+public:
+	string name;
+	int totalInterviews;
+	double averageScore;
+};
+
 class Question {
 
 private:
 	string category, correctAnswer, optionA, optionB, optionC, optionD, questionText;
 	int difficulty; //levels from 1-5 maybe (5 being the highest)
 public:
-	
-	int getDifficulty() const {
-		return difficulty;
-	}
-	string getCategory() const {
-		return category;
-	}
 
 	string getQuestionText() const {
 		return questionText;
 	}
 
-	string getCorrectAnswer() const {
-		return correctAnswer;
+	string displayQuestion() const {
+		return getQuestionText() + "\nA. " + optionA + "\nB. " + optionB + "\nC. " + optionC + "\nD. " + optionD;
 	}
-	string getOptionA() const {
-		return optionA;
+
+	bool checkAnswer(string userAnswer) const {
+		if (userAnswer == correctAnswer) {
+			cout<< "Correct!";
+			return true;
+		}
+		cout << "Incorrect.";
+		return false;
+	
 	}
-	string getOptionB() const {
-		return optionB;
-	}
-	string getOptionC() const {
-		return optionC;
-	}
-	string getOptionD() const {
-		return optionD;
-	}
+};
+
+class QuestionBank {
 
 };
 
+
 class InterviewSession {
 
-private: 	vector<Question> questions;
+private: 	
+	   vector<Question> questions;
 	   // Other private members related to the interview session
 	   User user;
-	   int score;
-	   int totalQuestions;
+	   int score = 0;
 
 public:
 	void startSession() {
 		// Implementation for starting the interview session
+
+		for (int i = 0; i < questions.size(); i++) {
+			// Display question and get user answer
+			cout << questions[i].displayQuestion() << endl;
+			string userAnswer;
+			cin >> userAnswer;
+			if (questions[i].checkAnswer(userAnswer)) {
+				score++;
+			}
+		}
 	}
 	void endSession() {
 		// Implementation for ending the interview session
 	}
 	void recordResult(User user, double score) {
 		// Implementation for recording the result of the interview session
+
 	}
-	void displayQuestions() {
-		// Implementation for displaying questions to the user
-
-class User {
-public:
-	string name;
-	double score;
-};
-
-
-class Menu:public User {
-
-public:
-
-	void print_main_menu() {
-		//display main menu
-		cout << "Hello, welcome to the Coding Interview Simulator! \n would you like to: " << endl;
-		cout << "A. Start the Interview \n B. See Last Interview's Results \n C. Exit" << endl;
-	}
-
-
-
 	void print_Results() {
-		// Implementation for printing interview results
-		cout << name << ", your new score is: " << score << endl;
+			// Implementation for printing interview results
+			cout << getUserName() << ", your score in this interview is: " << getScore() << endl;
+		}
 
+	string getUserName() const {
+		return user.name;
 	}
+
+	int getScore() const {
+		return score;
+	}
+	
+	
 };
