@@ -1,9 +1,11 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <random>
+#include <algorithm>
 using namespace std;
 
 class User {
@@ -25,6 +27,17 @@ private:
 	string category, correctAnswer, optionA, optionB, optionC, optionD, questionText, difficulty;
 public:
 
+	string getOptionA() const { return optionA; }
+	string getOptionB() const { return optionB; }
+	string getOptionC() const { return optionC; }
+	string getOptionD() const { return optionD; }
+	string getCorrectAnswer() const { return correctAnswer; }
+	string getDifficulty() const { return difficulty; }
+
+	bool checkAnswer(string userAnswer) const {
+		return userAnswer == correctAnswer;
+	}
+
 	string getQuestionText() const {
 		return questionText;
 	}
@@ -33,20 +46,10 @@ public:
 		return getQuestionText() + "\nA. " + optionA + "\nB. " + optionB + "\nC. " + optionC + "\nD. " + optionD;
 	}
 
-	bool checkAnswer(string userAnswer) const {
-		if (userAnswer == correctAnswer) {
-			cout<< "Correct!";
-			return true;
-		}
-		cout << "Incorrect.";
-		return false;
-	
-	}
-
 	friend class QuestionBank;
 };
 
-class QuestionBank : public Question {
+class QuestionBank {
 
 private:
 	vector<Question> questions;
@@ -86,17 +89,17 @@ private:
 
 			//get correct answer
 			getline(ss, answer, '|');
-			if (!answer.empty(); '|')
+			if (!answer.empty())
 				tempStorage.correctAnswer = answer;
 
 			//get difficulty
 			getline(ss, level, '|');
-			if (!level.empty(); '|')
+			if (!level.empty())
 				tempStorage.difficulty = level;
 
 			//get category
 			getline(ss, type, '|');
-			if (!level.empty(); '|')
+			if (!type.empty())
 				tempStorage.category = type;
 
 			//put question in vector bank
@@ -114,24 +117,28 @@ private:
 
 	}
 
-	void randomize() {
-		//randomizes the questions
-		default_random_engine rand;
-		default_random_engine engine(rand());
-	}
-
 
 
 public:
-	void getRandomQuestions(int numQuestions) {
-		// Implementation for retrieving random questions from the question bank
-		randomize();
-		displayQuestion();
+	QuestionBank() { storedQuestions(); }
 
+	vector<Question> getRandomQuestions(int numQuestions, const string& difficulty) {
+		vector<Question> filtered;
+		for (const Question& q : questions)
+			if (q.difficulty == difficulty)
+				filtered.push_back(q);
+
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::shuffle(filtered.begin(), filtered.end(), gen);
+
+		if ((int)filtered.size() > numQuestions)
+			filtered.resize(numQuestions);
+		return filtered;
 	}
 	void getQuestionsByCategory(string category) {
 		// Implementation for retrieving questions by category from the question bank
-		getRandomQuestions(5);
+		getRandomQuestions(5, "Beginner");
 	}
 
 	friend class InterviewSession;

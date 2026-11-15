@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Classes.cpp" />
+    <ClCompile Include="Classes.h" />
     <ClCompile Include="Functions.cpp" />
   </ItemGroup>
   <ItemGroup>
