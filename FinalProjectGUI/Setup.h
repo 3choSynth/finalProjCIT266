@@ -207,10 +207,32 @@ namespace FinalProjectGUI {
 		this->Close();
 	}
 	private: System::Void btnStart_Click(System::Object^ sender, System::EventArgs^ e) {
-		Interview^ interview = gcnew Interview();
+
+		// Make sure the user selected a difficulty.
+		if (cmbDifficulty->SelectedItem == nullptr) {
+			MessageBox::Show(
+				L"Please select a difficulty.",
+				L"Missing Difficulty"
+			);
+			return;
+		}
+
+		// Get the selected difficulty.
+		String^ selectedDifficulty = cmbDifficulty->SelectedItem->ToString();
+
+		// Get the number of questions.
+		int questionCount = Decimal::ToInt32(numQuestions->Value);
+
+		// Create the interview with the required arguments.
+		Interview^ interview = gcnew Interview(
+			mainMenu,
+			selectedDifficulty,
+			questionCount
+		);
 
 		interview->Show();
 
+		// Hide the setup window while the interview is running.
 		this->Hide();
 	}
 };

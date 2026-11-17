@@ -1,0 +1,30 @@
+What does C++ use to end most statements?|A period|A semicolon|A colon|A comma|B|Beginner|C++ Fundamentals
+Which data type is commonly used to store whole numbers?|double|char|int|string|C|Beginner|Data Types
+Which symbol is used for a single-line comment in C++?|//|/*|#|--|A|Beginner|C++ Fundamentals
+What is the purpose of the cout statement?|To receive user input|To declare a variable|To create a loop|To display output|D|Beginner|Input and Output
+Which keyword is used to make a decision in a program?|repeat|if|return|class|B|Beginner|Control Structures
+Which loop is guaranteed to execute at least once?|for loop|while loop|do-while loop|nested loop|C|Beginner|Control Structures
+What is an array used for?|To store multiple values of the same type|To end a program|To create a function|To compare two strings|A|Beginner|Data Structures
+What does the return statement do in a function?|Repeats the function|Creates a variable|Displays a message|Ends the function and may send back a value|D|Beginner|Functions
+Which operator checks whether two values are equal?|=|==|!=|<=|B|Beginner|Operators
+What is a class in C++?|A type of loop|A mathematical operator|A blueprint for creating objects|A variable that stores text|C|Beginner|Object-Oriented Programming
+What is the primary purpose of a constructor in C++?|To initialize an object when it is created|To destroy an object|To compare two objects|To prevent inheritance|A|Intermediate|Object-Oriented Programming
+What is encapsulation in object-oriented programming?|Combining multiple loops|Sorting data in order|Converting one data type into another|Bundling data and methods while controlling access to them|D|Intermediate|Object-Oriented Programming
+Which access specifier allows class members to be accessed only within the class and its friends?|public|private|protected|global|B|Intermediate|Object-Oriented Programming
+What is function overloading?|Using multiple classes in one program|Calling a function repeatedly|Defining multiple functions with the same name but different parameter lists|Changing a variable's data type|C|Intermediate|Functions
+What does a pointer store?|The memory address of another variable|The name of a function|A copy of an entire program|The number of variables in a class|A|Intermediate|Pointers
+What is the main purpose of a vector in C++?|To store only characters|To create a constant variable|To access private class members|To provide a dynamically resizable sequence of elements|D|Intermediate|Standard Template Library
+What is inheritance used for in object-oriented programming?|To delete objects automatically|To allow a class to acquire members from another class|To prevent code reuse|To convert integers into strings|B|Intermediate|Object-Oriented Programming
+What does a stack follow?|First In First Out|Random Access Only|Last In First Out|Smallest Value First|C|Intermediate|Data Structures
+What is the average time complexity of searching for a value in an unordered array of n elements?|O(n)|O(1)|O(log n)|O(n squared)|A|Intermediate|Algorithms
+What is the purpose of exception handling in C++?|To increase the size of an array|To declare a class|To create pointers|To manage runtime errors and exceptional conditions|D|Intermediate|Error Handling
+What is polymorphism in C++?|The ability to store multiple values in an array|The ability to use a common interface with different implementations|The process of deleting objects|The process of converting source code into machine code|B|Expert|Object-Oriented Programming
+What is the purpose of a virtual function in a base class?|To prevent a class from being inherited|To allocate memory for an array|To enable overridden functions to be selected through dynamic dispatch|To make a variable constant|C|Expert|Object-Oriented Programming
+What is the average time complexity of searching for a key in a well-distributed hash table?|O(1)|O(n squared)|O(log n)|O(n log n)|A|Expert|Data Structures
+Which data structure is commonly used to implement a priority queue?|Stack|Linked list only|Unsorted character array|Heap|D|Expert|Data Structures
+What is the main difference between a deep copy and a shallow copy?|A deep copy copies only pointers|A deep copy duplicates dynamically allocated data instead of only copying addresses|A shallow copy always creates a new class|There is no difference|B|Expert|Memory Management
+What is the worst-case time complexity of quicksort?|O(1)|O(log n)|O(n squared)|O(n)|C|Expert|Algorithms
+What is a pure virtual function in C++?|A virtual function declared with = 0|A function that cannot return a value|A function that only uses pointers|A function that runs automatically|A|Expert|Object-Oriented Programming
+What is a memory leak?|When a program runs out of variables|When a pointer stores a valid address|When an array is sorted incorrectly|When dynamically allocated memory is no longer accessible and has not been released|D|Expert|Memory Management
+Which C++ feature helps manage dynamically allocated resources automatically through object lifetime?|Function overloading|RAII|Recursion|Function templates|B|Expert|Memory Management
+What is the purpose of a template in C++?|To create graphical user interfaces|To prevent functions from being called|To write generic code that works with different data types|To reserve a fixed amount of memory|C|Expert|C++ Fundamentals

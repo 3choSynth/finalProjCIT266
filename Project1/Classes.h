@@ -6,6 +6,8 @@
 #include <sstream>
 #include <random>
 #include <algorithm>
+#include <ctime>
+
 using namespace std;
 
 class User {
@@ -189,5 +191,42 @@ public:
 		return sessionScore;
 	}
 	
-	
 };
+
+//Records a History Entry
+
+struct HistoryEntry {
+	string date, difficulty;
+	int score = 0, total = 0;
+};
+
+inline void saveResult(const string& difficulty, int score, int total) {
+	time_t now = time(nullptr);
+	tm t;
+	localtime_s(&t, &now);
+	char buf[16];
+	strftime(buf, sizeof(buf), "%m/%d/%Y", &t);
+
+	ofstream out("History.txt", ios::app);
+	out << buf << '|' << difficulty << '|' << score << '|' << total << '\n';
+}
+
+inline vector<HistoryEntry> loadHistory() {
+	vector<HistoryEntry> list;
+	ifstream in("History.txt");
+	string line;
+	while (getline(in, line)) {
+		if (line.empty()) continue;
+		stringstream ss(line);
+		HistoryEntry e;
+		string s, t;
+		getline(ss, e.date, '|');
+		getline(ss, e.difficulty, '|');
+		getline(ss, s, '|');
+		getline(ss, t, '|');
+		try { e.score = stoi(s); e.total = stoi(t); }
+		catch (...) { continue; }
+		list.push_back(e);
+	}
+	return list;
+}

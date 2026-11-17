@@ -6,17 +6,17 @@ using namespace std;
 
 int main() {
 
-	char userChoice = ' ';
+	/*char userChoice = ' ';
 
 	//display main menu
 	cout << "Hello, welcome to the Coding Interview Simulator! \n would you like to: " << endl;
 	cout << "A. Start the Interview \n B. See Last Interview's Results \n C. Exit" << endl;
-	cin >> userChoice;
+	cin >> userChoice;*/
 	
 	InterviewSession session; // Create an instance of InterviewSession
 	User newUser;
 
-	switch (userChoice) {
+	/*switch (userChoice) {
 	case 'A':
 		//start interview session
 		newUser.askName();// call the askname method
@@ -31,6 +31,6 @@ int main() {
 	default:
 		cout << "Invalid choice. Please select A, B, or C." << endl;
 		break;
-	}
+	}*/
 
 }

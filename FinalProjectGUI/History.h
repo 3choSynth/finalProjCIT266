@@ -1,4 +1,5 @@
 #pragma once
+#include "../Project1/Classes.h"
 
 namespace FinalProjectGUI {
 
@@ -304,14 +305,33 @@ namespace FinalProjectGUI {
 		}
 #pragma endregion
 
-	void LoadHistory() {
-		// TODO: replace with backend data (date, difficulty, score, total)
-		dataGridView1->Rows->Add(L"11/15/2026", L"Beginner", L"4/5", L"80%");
-		dataGridView1->Rows->Add(L"11/14/2026", L"Expert", L"3/5", L"60%");
+		//Loads History when form opens
 
-		lblLatest->Text = L"4/5";
-		lblBest->Text = L"4/5";
-		lblAverage->Text = L"70%";
+	private: void LoadHistory() {
+		std::vector<HistoryEntry> list = loadHistory();
+		if (list.empty()) return;
+
+		double sum = 0, bestPct = -1;
+		int bestIdx = 0;
+		for (int i = 0; i < (int)list.size(); i++) {
+			const HistoryEntry& e = list[i];
+			double pct = e.total > 0 ? 100.0 * e.score / e.total : 0;
+			sum += pct;
+			if (pct > bestPct) { bestPct = pct; bestIdx = i; }
+
+			// Insert at the top so the newest attempt shows first
+			dataGridView1->Rows->Insert(0,
+				gcnew String(e.date.c_str()),
+				gcnew String(e.difficulty.c_str()),
+				String::Format(L"{0}/{1}", e.score, e.total),
+				String::Format(L"{0:F0}%", pct));
+		}
+
+		const HistoryEntry& last = list.back();
+		const HistoryEntry& best = list[bestIdx];
+		lblLatest->Text = String::Format(L"{0}/{1}", last.score, last.total);
+		lblBest->Text = String::Format(L"{0}/{1}", best.score, best.total);
+		lblAverage->Text = String::Format(L"{0:F0}%", sum / list.size());
 	}
 
 	private: System::Void History_FormClosed(System::Object^ sender, FormClosedEventArgs^ e) {

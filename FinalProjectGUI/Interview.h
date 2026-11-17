@@ -1,27 +1,52 @@
 #pragma once
+#include "../Project1/Classes.h"
+#include <msclr/marshal_cppstd.h>
 
 namespace FinalProjectGUI {
 
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
+	using namespace System::Collections::Generic;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for Interview
-	/// </summary>
+	public ref class QuestionData {
+	public:
+		String^ text;
+		cli::array<String^>^ options;
+		int correct;   // 0=A, 1=B, 2=C, 3=D
+		QuestionData(String^ t, String^ a, String^ b, String^ c, String^ d, int correctIndex) {
+			text = t;
+			options = gcnew cli::array<String^>(4) { a, b, c, d };
+			correct = correctIndex;
+		}
+	};
+
 	public ref class Interview : public System::Windows::Forms::Form
 	{
 	public:
-		Interview(void)
+		Interview(Form^ menu, String^ diff, int count)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			mainMenu = menu;
+			difficulty = diff;
+			currentIndex = 0;
+			score = 0;
+
+			btnSubmit->Click += gcnew EventHandler(this, &Interview::btnSubmit_Click);
+			btnContinue->Click += gcnew EventHandler(this, &Interview::btnContinue_Click);
+			this->FormClosed += gcnew FormClosedEventHandler(this, &Interview::Interview_FormClosed);
+
+			lblDifficulty->Text = L"Difficulty: " + difficulty;
+			LoadQuestions(count);   // the first question is shown in Interview_Load
 		}
+
+	private:std::string DifficultyStd() {
+		String^ d = difficulty;   // local copy, so it can be passed by reference
+		return msclr::interop::marshal_as<std::string>(d);
+	}
 
 	protected:
 		/// <summary>
@@ -51,12 +76,11 @@ namespace FinalProjectGUI {
 	private: System::Windows::Forms::Label^ lblFeedback;
 	private: System::Windows::Forms::Label^ lblFeedbackTitle;
 
-
-
-
-
-
-	protected:
+	private: Form^ mainMenu;
+	private: String^ difficulty;
+	private: int currentIndex;
+	private: int score;
+	private: List<QuestionData^>^ questions;
 
 	private:
 		/// <summary>
@@ -264,6 +288,7 @@ namespace FinalProjectGUI {
 			this->lblFeedbackTitle->Size = System::Drawing::Size(397, 39);
 			this->lblFeedbackTitle->TabIndex = 15;
 			this->lblFeedbackTitle->Text = L"Correct! / Incorrect";
+
 			// 
 			// Interview
 			// 
@@ -289,8 +314,124 @@ namespace FinalProjectGUI {
 
 		}
 #pragma endregion
-	private: System::Void Interview_Load(System::Object^ sender, System::EventArgs^ e) {
-	}
+		private:
+			void LoadQuestions(int count) {
 
+				QuestionBank bank;   // reads Questions.txt
+				std::vector<Question> picked = bank.getRandomQuestions(
+					count, DifficultyStd());
+
+				questions = gcnew List<QuestionData^>();
+				for (const Question& q : picked) {
+					std::string ca = q.getCorrectAnswer();
+					int idx = -1;
+
+					// Check if answer is stored as letter.
+					if (ca.size() == 1) {
+						char answerLetter = static_cast<char>(
+							toupper(static_cast<unsigned char>(ca[0]))
+							);
+
+						if (answerLetter >= 'A' && answerLetter <= 'D') {
+							idx = answerLetter - 'A';
+						}
+					}
+
+					// compare it against the answer text
+					else {
+						if (ca == q.getOptionA()) idx = 0;
+						else if (ca == q.getOptionB()) idx = 1;
+						else if (ca == q.getOptionC()) idx = 2;
+						else if (ca == q.getOptionD()) idx = 3;
+					}
+
+					// Skip questions with invalid correct answer
+					if (idx == -1) {
+						continue;
+					}
+
+					questions->Add(gcnew QuestionData(
+						msclr::interop::marshal_as<String^>(q.getQuestionText()),
+						msclr::interop::marshal_as<String^>(q.getOptionA()),
+						msclr::interop::marshal_as<String^>(q.getOptionB()),
+						msclr::interop::marshal_as<String^>(q.getOptionC()),
+						msclr::interop::marshal_as<String^>(q.getOptionD()),
+						idx
+					));
+				}
+			}
+
+			//Display question in the form
+			void ShowQuestion() {
+				QuestionData^ q = questions[currentIndex];
+				lblQuestionCount->Text = String::Format(L"Question {0}/{1}", currentIndex + 1, questions->Count);
+				lblQuestion->Text = q->text;
+				rdoA->Text = L"A: " + q->options[0];
+				rdoB->Text = L"B: " + q->options[1];
+				rdoC->Text = L"C: " + q->options[2];
+				rdoD->Text = L"D: " + q->options[3];
+				rdoA->Checked = false; rdoB->Checked = false;
+				rdoC->Checked = false; rdoD->Checked = false;
+				pnlFeedback->Visible = false;
+				pnlQuestion->Visible = true;
+			}
+
+			System::Void Interview_Load(System::Object^ sender, System::EventArgs^ e) {
+				if (questions->Count == 0) {
+					MessageBox::Show(L"No questions found for this difficulty. Check Questions.txt.", L"No questions");
+					this->Close();   // FormClosed shows the menu
+					return;
+				}
+				ShowQuestion();
+			}
+
+			//Submit button action
+			System::Void btnSubmit_Click(System::Object^ sender, System::EventArgs^ e) {
+				int picked = -1;
+				if (rdoA->Checked) picked = 0;
+				else if (rdoB->Checked) picked = 1;
+				else if (rdoC->Checked) picked = 2;
+				else if (rdoD->Checked) picked = 3;
+
+				if (picked == -1) {
+					MessageBox::Show(L"Please pick an answer.", L"No answer selected");
+					return;
+				}
+
+				QuestionData^ q = questions[currentIndex];
+				String^ letters = L"ABCD";
+				if (picked == q->correct) {
+					score++;
+					lblFeedbackTitle->Text = L"Correct!";
+					lblFeedback->Text = L"Nice work.";
+				}
+				else {
+					lblFeedbackTitle->Text = L"Incorrect";
+					lblFeedback->Text = L"The correct answer was " + letters->Substring(q->correct, 1) +
+						L": " + q->options[q->correct];
+				}
+
+				btnContinue->Text = (currentIndex == questions->Count - 1) ? L"See Results" : L"Continue";
+				pnlQuestion->Visible = false;
+				pnlFeedback->Visible = true;
+			}
+
+			System::Void btnContinue_Click(System::Object^ sender, System::EventArgs^ e) {
+				currentIndex++;
+				if (currentIndex < questions->Count) {
+					ShowQuestion();
+					return;
+				}
+
+				double pct = 100.0 * score / questions->Count;
+				saveResult(DifficultyStd(), score, questions->Count);
+				MessageBox::Show(String::Format(L"Final score: {0}/{1} ({2:F0}%)", score, questions->Count, pct),
+					L"Interview Complete");
+				this->Close();   // FormClosed shows the menu
+			}
+
+			System::Void Interview_FormClosed(System::Object^ sender, FormClosedEventArgs^ e) {
+				mainMenu->Show();
+			}
 };
 }
