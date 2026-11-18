@@ -168,14 +168,15 @@ namespace FinalProjectGUI {
 			// 
 			// label4
 			// 
-			this->label4->AutoSize = true;
+			this->label4->AutoSize = false;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Monospac821 BT", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label4->Location = System::Drawing::Point(104, 187);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(475, 29);
+			this->label4->Size = System::Drawing::Size(470, 29);
 			this->label4->TabIndex = 8;
-			this->label4->Text = L"Configure your practice interview";
+			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			this->label4->Text = L"You need atleast 75% to pass!";
 			// 
 			// Setup
 			// 

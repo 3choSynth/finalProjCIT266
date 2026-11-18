@@ -75,7 +75,7 @@ namespace FinalProjectGUI {
 			this->interview->Name = L"interview";
 			this->interview->Size = System::Drawing::Size(450, 73);
 			this->interview->TabIndex = 0;
-			this->interview->Text = L"Interview";
+			this->interview->Text = L"Start Interview";
 			this->interview->UseVisualStyleBackColor = false;
 			this->interview->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 

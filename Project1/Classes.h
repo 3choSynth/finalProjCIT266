@@ -157,34 +157,13 @@ private:
 	   int sessionScore = 0;
 
 public:
-	void startSession() {
-		// Implementation for starting the interview session
-
-		for (int i = 0; i < sessionQuestions.size(); i++) {
-			// Display question and get user answer
-			cout << sessionQuestions[i].displayQuestion() << endl;
-			string userAnswer;
-			cin >> userAnswer;
-			if (sessionQuestions[i].checkAnswer(userAnswer)) {
-				sessionScore++;
-			}
-		}
+	
+	double getPercentageScore() {
+		return (static_cast<double>(sessionScore) / sessionQuestions.size()) * 100;		
 	}
-	void endSession() {
-		// Implementation for ending the interview session
-		double percentageScore = (static_cast<double>(sessionScore) / sessionQuestions.size()) * 100;
-		cout << "Interview session ended. Your score is: " << sessionScore	 <<"/" << sessionQuestions.size() << " (" << percentageScore << "%)" << endl;
-		
-		if (percentageScore >= 75) {
-			cout << "Congratulations! You passed the interview." << endl;
-		}
-		else {
-			cout << "You failed the interview." << endl;
-		}
-	}
-	void recordResult(User user, double score) {
-		// Implementation for recording the result of the interview session
 
+	bool passedInterview() {
+		return getPercentageScore() >= 75;
 	}
 
 	int getScore() const {
