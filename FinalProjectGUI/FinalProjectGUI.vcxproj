@@ -146,7 +146,9 @@
     <EmbeddedResource Include="History.resx" />
     <EmbeddedResource Include="Interview.resx" />
     <EmbeddedResource Include="Setup.resx" />
-    <EmbeddedResource Include="StartMenu.resx" />
+    <EmbeddedResource Include="StartMenu.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

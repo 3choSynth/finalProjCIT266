@@ -425,9 +425,10 @@ namespace FinalProjectGUI {
 
 				double pct = 100.0 * score / questions->Count;
 				saveResult(DifficultyStd(), score, questions->Count);
-				String^ result = (pct >= 75) ? L"You passed!!" : L"Might need a new line of work..s";
+				String^ popUpTitle = (pct >= 75) ? L"Interview Passed!" : L"Interview Failed..";
+				String^ result = (pct >= 75) ? L"You maybe can get a job now." : L"Might need a new line of work.";
 				MessageBox::Show(String::Format(L"Final score: {0}/{1} ({2:F0}%) \n{3}", score, questions->Count, pct, result),
-					L"Interview Complete");
+					popUpTitle );
 				this->Close();   // FormClosed shows the menu
 			}
 

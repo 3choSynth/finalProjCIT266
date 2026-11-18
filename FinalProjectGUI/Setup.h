@@ -176,7 +176,7 @@ namespace FinalProjectGUI {
 			this->label4->Size = System::Drawing::Size(470, 29);
 			this->label4->TabIndex = 8;
 			this->label4->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
-			this->label4->Text = L"You need atleast 75% to pass!";
+			this->label4->Text = L"75% Correctness to Pass Interview";
 			// 
 			// Setup
 			// 

@@ -98,11 +98,13 @@ namespace FinalProjectGUI {
 			this->dataGridView1->AllowUserToDeleteRows = false;
 			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->dataGridView1->ColumnHeadersBorderStyle = System::Windows::Forms::DataGridViewHeaderBorderStyle::Single;
+			this->dataGridView1->ColumnHeadersDefaultCellStyle->Alignment = DataGridViewContentAlignment::MiddleCenter;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
 				this->Date, this->Difficulty,
 					this->Score, this->Percentage
 			});
+			this->dataGridView1->DefaultCellStyle->Alignment = DataGridViewContentAlignment::MiddleCenter;
 			this->dataGridView1->GridColor = System::Drawing::SystemColors::ControlText;
 			this->dataGridView1->Location = System::Drawing::Point(53, 455);
 			this->dataGridView1->Name = L"dataGridView1";
@@ -116,21 +118,24 @@ namespace FinalProjectGUI {
 			// 
 			this->Date->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::Fill;
 			this->Date->DividerWidth = 2;
-			this->Date->FillWeight = 50;
+			this->Date->FillWeight = 110;
 			this->Date->HeaderText = L"Date";
 			this->Date->MinimumWidth = 10;
 			this->Date->Name = L"Date";
 			this->Date->ReadOnly = true;
 			this->Date->Resizable = System::Windows::Forms::DataGridViewTriState::True;
+			this->Date->HeaderCell->Style->Alignment = DataGridViewContentAlignment::MiddleCenter;
 			// 
 			// Difficulty
 			// 
 			this->Difficulty->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::Fill;
 			this->Difficulty->DividerWidth = 2;
+			this->Difficulty->FillWeight = 110;
 			this->Difficulty->HeaderText = L"Difficulty";
 			this->Difficulty->MinimumWidth = 10;
 			this->Difficulty->Name = L"Difficulty";
 			this->Difficulty->ReadOnly = true;
+			this->Difficulty->HeaderCell->Style->Alignment = DataGridViewContentAlignment::MiddleCenter;
 			// 
 			// Score
 			// 
@@ -140,6 +145,7 @@ namespace FinalProjectGUI {
 			this->Score->MinimumWidth = 10;
 			this->Score->Name = L"Score";
 			this->Score->ReadOnly = true;
+			this->Score->HeaderCell->Style->Alignment = DataGridViewContentAlignment::MiddleCenter;
 			// 
 			// Percentage
 			// 
@@ -149,10 +155,11 @@ namespace FinalProjectGUI {
 			this->Percentage->MinimumWidth = 10;
 			this->Percentage->Name = L"Percentage";
 			this->Percentage->ReadOnly = true;
+			this->Percentage->HeaderCell->Style->Alignment = DataGridViewContentAlignment::MiddleCenter;
 			// 
 			// lblTitle
 			// 
-			this->lblTitle->AutoSize = true;
+			this->lblTitle->AutoSize = false;
 			this->lblTitle->Font = (gcnew System::Drawing::Font(L"Monospac821 BT", 13.875F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->lblTitle->Location = System::Drawing::Point(136, 130);
@@ -181,14 +188,16 @@ namespace FinalProjectGUI {
 			// 
 			// lblLatestTitle
 			// 
-			this->lblLatestTitle->AutoSize = true;
+			this->lblLatestTitle->AutoSize = false;
 			this->lblLatestTitle->Font = (gcnew System::Drawing::Font(L"Monospac821 BT", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblLatestTitle->Location = System::Drawing::Point(16, 85);
+			this->lblLatestTitle->Location = System::Drawing::Point(0, 85);
 			this->lblLatestTitle->Name = L"lblLatestTitle";
-			this->lblLatestTitle->Size = System::Drawing::Size(181, 29);
+			this->lblLatestTitle->Size = System::Drawing::Size(186, 29);
 			this->lblLatestTitle->TabIndex = 10;
 			this->lblLatestTitle->Text = L"Latest Score";
+			this->lblLatestTitle->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
+			
 			// 
 			// pnlSummary
 			// 
@@ -200,64 +209,68 @@ namespace FinalProjectGUI {
 			this->pnlSummary->Controls->Add(this->lblLatestTitle);
 			this->pnlSummary->Location = System::Drawing::Point(61, 206);
 			this->pnlSummary->Name = L"pnlSummary";
-			this->pnlSummary->Padding = System::Windows::Forms::Padding(10);
 			this->pnlSummary->Size = System::Drawing::Size(558, 125);
 			this->pnlSummary->TabIndex = 11;
 			// 
 			// lblAverage
 			// 
-			this->lblAverage->AutoSize = true;
+			this->lblAverage->AutoSize = false;
 			this->lblAverage->Font = (gcnew System::Drawing::Font(L"Monospac821 BT", 13.875F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblAverage->Location = System::Drawing::Point(460, 18);
+			this->lblAverage->Location = System::Drawing::Point(372, 18);
 			this->lblAverage->Name = L"lblAverage";
-			this->lblAverage->Size = System::Drawing::Size(64, 45);
+			this->lblAverage->Size = System::Drawing::Size(186, 45);
 			this->lblAverage->TabIndex = 14;
 			this->lblAverage->Text = L"0%";
+			this->lblAverage->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// lblBest
 			// 
-			this->lblBest->AutoSize = true;
+			this->lblBest->AutoSize = false;
 			this->lblBest->Font = (gcnew System::Drawing::Font(L"Monospac821 BT", 13.875F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblBest->Location = System::Drawing::Point(261, 18);
+			this->lblBest->Location = System::Drawing::Point(186, 18);
 			this->lblBest->Name = L"lblBest";
-			this->lblBest->Size = System::Drawing::Size(86, 45);
+			this->lblBest->Size = System::Drawing::Size(186, 45);
 			this->lblBest->TabIndex = 13;
 			this->lblBest->Text = L"0/0";
+			this->lblBest->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// lblLatest
 			// 
-			this->lblLatest->AutoSize = true;
+			this->lblLatest->AutoSize = false;
 			this->lblLatest->Font = (gcnew System::Drawing::Font(L"Monospac821 BT", 13.875F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblLatest->Location = System::Drawing::Point(55, 18);
+			this->lblLatest->Location = System::Drawing::Point(0, 18);
 			this->lblLatest->Name = L"lblLatest";
-			this->lblLatest->Size = System::Drawing::Size(86, 45);
+			this->lblLatest->Size = System::Drawing::Size(186, 45);
 			this->lblLatest->TabIndex = 12;
 			this->lblLatest->Text = L"0/0";
+			this->lblLatest->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// lblAverageTitle
 			// 
-			this->lblAverageTitle->AutoSize = true;
+			this->lblAverageTitle->AutoSize = false;
 			this->lblAverageTitle->Font = (gcnew System::Drawing::Font(L"Monospac821 BT", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblAverageTitle->Location = System::Drawing::Point(430, 85);
+			this->lblAverageTitle->Location = System::Drawing::Point(372, 85);
 			this->lblAverageTitle->Name = L"lblAverageTitle";
-			this->lblAverageTitle->Size = System::Drawing::Size(111, 29);
+			this->lblAverageTitle->Size = System::Drawing::Size(186, 29);
 			this->lblAverageTitle->TabIndex = 12;
 			this->lblAverageTitle->Text = L"Average";
+			this->lblAverageTitle->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// lblBestTitle
 			// 
-			this->lblBestTitle->AutoSize = true;
+			this->lblBestTitle->AutoSize = false;
 			this->lblBestTitle->Font = (gcnew System::Drawing::Font(L"Monospac821 BT", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblBestTitle->Location = System::Drawing::Point(231, 85);
+			this->lblBestTitle->Location = System::Drawing::Point(186, 85);
 			this->lblBestTitle->Name = L"lblBestTitle";
-			this->lblBestTitle->Size = System::Drawing::Size(153, 29);
+			this->lblBestTitle->Size = System::Drawing::Size(186, 29);
 			this->lblBestTitle->TabIndex = 11;
 			this->lblBestTitle->Text = L"Best Score";
+			this->lblBestTitle->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// lblSummaryTitle
 			// 
